@@ -27,11 +27,88 @@ class ViewControllerComplex: UIViewController,MKMapViewDelegate,CLLocationManage
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         // BEGIN-CODE-UOC-2
         
+        // We calculate sizes and positions
+        let screenRect = UIScreen.main.bounds
+        let buttonSize:CGFloat = 80
+        let buttonMargin:CGFloat = 10
         
+        let mapRect = CGRect(x: screenRect.origin.x, y: screenRect.origin.y,
+                             width: screenRect.size.width , height: screenRect.size.height * 0.5)
+        
+        let videoRect = CGRect(x: screenRect.origin.x, y: mapRect.origin.y + mapRect.size.height,
+                               width: screenRect.size.width,
+                               height: screenRect.size.height - mapRect.size.height - buttonSize)
+        
+        let playRect = CGRect(x: screenRect.origin.x + buttonMargin,
+                              y: (screenRect.origin.y + screenRect.size.height) - buttonSize,
+                                 width: buttonSize, height: buttonSize)
+        
+        // We calculate pause button position depending on play button position
+        let pauseRect = CGRect(x: playRect.origin.x + playRect.size.width + buttonMargin * 2,
+                               y: playRect.origin.y,
+                              width: buttonSize, height: buttonSize)
+        
+        // We set a black background
+        self.view.backgroundColor = UIColor.black
+        
+        // We create the map
+        self.m_map = MKMapView()
+
+        self.m_map?.delegate = self
+        self.m_map?.frame = mapRect
+        self.m_map?.mapType = MKMapType.standard
+        
+        self.view.addSubview(self.m_map!)
+        
+        self.AddMarkers()
+        
+        
+        // We create the player
+        
+        self.player = AVPlayer()
+//        self.player = AVPlayer(url: NSURL(string: ("https://www.w3schools.com/html/mov_bbb.mp4"))! as URL)
+        
+        self.m_AVPlayerLayer = AVPlayerLayer(player: self.player)
+        self.m_AVPlayerLayer?.frame = videoRect
+        self.m_AVPlayerLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
+        self.view.layer.addSublayer(self.m_AVPlayerLayer!)
+//        self.player?.play()
+        
+        //self.player?.addObserver(self, forKeyPath: "status", options: NSKeyValueObservingOptions(rawValue: 0), context: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.playerItemDidReachEnd), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: self.player.currentItem)
+        
+//        let urlString = "http://einfmlinux1.uoc.edu/devios/media/movie.mp4"
+//        let urlURL = URL(string: urlString)
+//
+//        self.m_player.player = AVPlayer(url: urlURL)
+//        self.m_player.player?.play()
+        
+        // We create the tv frame
+        let tvImageView = UIImageView(frame: videoRect)
+        tvImageView.image = UIImage(named: "tv.png")
+        self.view.addSubview(tvImageView)
+        
+        // We create buttons
+        
+        let playButton = UIButton(type: UIButtonType.custom)
+        playButton.addTarget(self, action: #selector(Play), for: UIControlEvents.touchDown)
+        playButton.frame = playRect
+        playButton.setImage(UIImage(named: "play.png"), for: UIControlState.normal)
+        
+        let pauseButton = UIButton(type: UIButtonType.custom)
+        pauseButton.addTarget(self, action: #selector(Pause), for: UIControlEvents.touchDown)
+        pauseButton.frame = pauseRect
+        pauseButton.setImage(UIImage(named: "pause.png"), for: UIControlState.normal)
+        
+        self.view.addSubview(playButton)
+        self.view.addSubview(pauseButton)
+        
+        //
+
         // END-CODE-UOC-2
         
         
@@ -53,14 +130,14 @@ class ViewControllerComplex: UIViewController,MKMapViewDelegate,CLLocationManage
     // BEGIN-CODE-UOC-8
     func Play(sender:UIButton)
     {
-      
+      NSLog("hey")
       
     }
 
     
     func Pause(sender:UIButton)
     {
-    
+     NSLog("hay")
     }
     // END-CODE-UOC-8
     
