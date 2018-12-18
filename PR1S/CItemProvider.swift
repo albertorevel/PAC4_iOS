@@ -115,7 +115,9 @@ class CItemProvider : NSObject, XMLParserDelegate
         
         do
         {
-            xmlData = try NSData(contentsOf: URL(string: str_url)!)
+//            xmlData = try NSData(contentsOf: URL(string: str_url)!)
+            let filepath = Bundle.main.path(forResource: "data4", ofType: "xml")
+            xmlData = try NSData(contentsOfFile: filepath ?? "data4.xml")
             self.m_parser = XMLParser(data: xmlData as Data)
             self.m_parser?.delegate = self
             self.m_parser?.parse();

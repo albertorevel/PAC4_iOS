@@ -22,6 +22,10 @@
 		B4AE71531D96EADC005F4C75 /* ViewControllerBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AE71511D96EADC005F4C75 /* ViewControllerBasic.swift */; };
 		B4AE71541D96EADC005F4C75 /* ViewControllerBasic.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4AE71521D96EADC005F4C75 /* ViewControllerBasic.xib */; };
 		B4AE717C1D96F1B2005F4C75 /* icons in Resources */ = {isa = PBXBuildFile; fileRef = B4AE717B1D96F1B2005F4C75 /* icons */; };
+		EE6BD65321C8CA9A00941494 /* data4.xml in Resources */ = {isa = PBXBuildFile; fileRef = EE6BD65221C8CA9A00941494 /* data4.xml */; };
+		EE6BD65621C8CC4B00941494 /* MKMyPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6BD65521C8CC4B00941494 /* MKMyPointAnnotation.swift */; };
+		EE6BD65921C8CD1C00941494 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE6BD65821C8CD1C00941494 /* CoreLocation.framework */; };
+		EE6BD65B21C8CD2400941494 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE6BD65A21C8CD2400941494 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +67,10 @@
 		B4AE71511D96EADC005F4C75 /* ViewControllerBasic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerBasic.swift; sourceTree = "<group>"; };
 		B4AE71521D96EADC005F4C75 /* ViewControllerBasic.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewControllerBasic.xib; sourceTree = "<group>"; };
 		B4AE717B1D96F1B2005F4C75 /* icons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = icons; sourceTree = "<group>"; };
+		EE6BD65221C8CA9A00941494 /* data4.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = data4.xml; sourceTree = "<group>"; };
+		EE6BD65521C8CC4B00941494 /* MKMyPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKMyPointAnnotation.swift; sourceTree = "<group>"; };
+		EE6BD65821C8CD1C00941494 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		EE6BD65A21C8CD2400941494 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +78,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE6BD65B21C8CD2400941494 /* MapKit.framework in Frameworks */,
+				EE6BD65921C8CD1C00941494 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +107,7 @@
 				B4AE712E1D966639005F4C75 /* PR1STests */,
 				B4AE71391D966639005F4C75 /* PR1SUITests */,
 				B4AE71181D966638005F4C75 /* Products */,
+				EE6BD65721C8CD1B00941494 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -113,6 +124,8 @@
 		B4AE71191D966638005F4C75 /* PR1S */ = {
 			isa = PBXGroup;
 			children = (
+				EE6BD65421C8CC1B00941494 /* Custom */,
+				EE6BD65221C8CA9A00941494 /* data4.xml */,
 				B42BD9AF1DFF28680037AE2C /* img */,
 				B4AE717B1D96F1B2005F4C75 /* icons */,
 				B4AE714A1D966763005F4C75 /* Parsing */,
@@ -163,6 +176,23 @@
 				B4AE714F1D966E1B005F4C75 /* CItemData.swift */,
 			);
 			name = Parsing;
+			sourceTree = "<group>";
+		};
+		EE6BD65421C8CC1B00941494 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				EE6BD65521C8CC4B00941494 /* MKMyPointAnnotation.swift */,
+			);
+			name = Custom;
+			sourceTree = "<group>";
+		};
+		EE6BD65721C8CD1B00941494 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EE6BD65A21C8CD2400941494 /* MapKit.framework */,
+				EE6BD65821C8CD1C00941494 /* CoreLocation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -278,6 +308,7 @@
 				B4AE71541D96EADC005F4C75 /* ViewControllerBasic.xib in Resources */,
 				B4AE71221D966639005F4C75 /* Assets.xcassets in Resources */,
 				B4AE717C1D96F1B2005F4C75 /* icons in Resources */,
+				EE6BD65321C8CA9A00941494 /* data4.xml in Resources */,
 				B4AE71201D966639005F4C75 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -307,6 +338,7 @@
 				B4AE714C1D966CC3005F4C75 /* CItemProvider.swift in Sources */,
 				B4AE71531D96EADC005F4C75 /* ViewControllerBasic.swift in Sources */,
 				B4AE71501D966E1B005F4C75 /* CItemData.swift in Sources */,
+				EE6BD65621C8CC4B00941494 /* MKMyPointAnnotation.swift in Sources */,
 				B4AE711B1D966638005F4C75 /* AppDelegate.swift in Sources */,
 				B42BD9B31DFF2A460037AE2C /* ViewControllerComplex.swift in Sources */,
 			);

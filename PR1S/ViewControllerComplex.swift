@@ -33,6 +33,7 @@ class ViewControllerComplex: UIViewController,MKMapViewDelegate,CLLocationManage
         
         // We calculate sizes and positions
         let screenRect = UIScreen.main.bounds
+
         let buttonSize:CGFloat = 80
         let buttonMargin:CGFloat = 10
         
@@ -55,7 +56,7 @@ class ViewControllerComplex: UIViewController,MKMapViewDelegate,CLLocationManage
         // We set a black background
         self.view.backgroundColor = UIColor.black
         
-        // We create the map
+        // We create the map and we add the given markers
         self.m_map = MKMapView()
 
         self.m_map?.delegate = self
@@ -67,7 +68,7 @@ class ViewControllerComplex: UIViewController,MKMapViewDelegate,CLLocationManage
         self.AddMarkers()
         
         
-        // We create the player
+        // We create the video player
         
         self.player = AVPlayer()
 //        self.player = AVPlayer(url: NSURL(string: ("https://www.w3schools.com/html/mov_bbb.mp4"))! as URL)
@@ -92,7 +93,7 @@ class ViewControllerComplex: UIViewController,MKMapViewDelegate,CLLocationManage
         tvImageView.image = UIImage(named: "tv.png")
         self.view.addSubview(tvImageView)
         
-        // We create buttons
+        // We create play and pause buttons and we associate an action to them
         
         let playButton = UIButton(type: UIButtonType.custom)
         playButton.addTarget(self, action: #selector(Play), for: UIControlEvents.touchDown)
@@ -106,8 +107,6 @@ class ViewControllerComplex: UIViewController,MKMapViewDelegate,CLLocationManage
         
         self.view.addSubview(playButton)
         self.view.addSubview(pauseButton)
-        
-        //
 
         // END-CODE-UOC-2
         
@@ -146,7 +145,31 @@ class ViewControllerComplex: UIViewController,MKMapViewDelegate,CLLocationManage
     
     // BEGIN-CODE-UOC-3
     
-    
+        guard let data:Data = self.m_item?.m_data.data(using: String.Encoding.utf8) else {
+            return
+        }
+        do {
+            let pointsList: NSMutableArray = try JSONSerialization.jsonObject(with: data , options: JSONSerialization.ReadingOptions.mutableContainers) as! NSMutableArray
+            
+            for point in pointsList {
+                
+                let title = (point as! NSMutableDictionary).value(forKey: "title") as! String
+                let lat = (point as! NSMutableDictionary).value(forKey: "lat") as! Double
+                let long = (point as! NSMutableDictionary).value(forKey: "lon") as! Double
+                let movieURL = (point as! NSMutableDictionary).value(forKey: "movie") as! String
+                
+                
+                
+                let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(lat), longitude: CLLocationDegrees(long))
+                let annotation = MKMyPointAnnotation(coordinate: coordinate, title: title, subtitle: "", movieURL: movieURL )
+                
+                self.m_map?.addAnnotation(annotation)
+            }
+        
+        } catch {
+            print("Unexpected error: \(error).")
+        }
+        
     
     // END-CODE-UOC-3
     
