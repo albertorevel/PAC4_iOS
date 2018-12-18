@@ -115,7 +115,32 @@ class ViewControllerComplex: UIViewController,MKMapViewDelegate,CLLocationManage
         
         // BEGIN-CODE-UOC-5
         
+        self.m_locationManager = CLLocationManager()
+
         
+        self.m_locationManager?.delegate = self
+        
+        self.m_locationManager?.allowsBackgroundLocationUpdates = true
+        
+        self.m_locationManager?.distanceFilter = 500 // The minimum distance (measured in meters) a device must move horizontally before an update event is generated.
+        
+        self.m_locationManager?.desiredAccuracy = kCLLocationAccuracyBest // Determining a location with greater accuracy requires more time and more power.
+        
+        //  if you need the current location only within a kilometer, you should specify kCLLocationAccuracyKilometer
+        //   requres less time and power.
+        
+        self.m_map?.delegate = self
+        
+        let status:CLAuthorizationStatus = CLLocationManager.authorizationStatus()
+        
+        if (status == CLAuthorizationStatus.notDetermined){
+            self.m_locationManager?.requestWhenInUseAuthorization()
+        }
+        else{
+            self.m_locationManager?.startUpdatingLocation()
+//            self.startLocation()
+            
+        }
         
         // END-CODE-UOC-5
         
@@ -184,6 +209,77 @@ class ViewControllerComplex: UIViewController,MKMapViewDelegate,CLLocationManage
     
     // BEGIN-CODE-UOC-4
     
+    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+        
+        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        
+        let location = userLocation.coordinate
+        
+        let region = MKCoordinateRegion(center: location ,span: span)
+        
+        self.m_map?.setRegion(region,animated: true)
+        
+    }
+    
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?
+    {
+        
+        if  let annotation = annotation as? MKMyPointAnnotation
+        {
+            
+            let identifier = "CustomPinAnnotationView"
+            var pinView: MKPinAnnotationView
+            if let dequeuedView = self.m_map?.dequeueReusableAnnotationView(withIdentifier: identifier)
+                as? MKPinAnnotationView {
+                dequeuedView.annotation = annotation
+                pinView = dequeuedView
+            } else {
+                
+                pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                pinView.canShowCallout = true
+                
+                pinView.calloutOffset = CGPoint(x: -5, y: 5)
+                pinView.rightCalloutAccessoryView = UIButton(type:.detailDisclosure) as UIView
+                
+                ///
+                let current_loc:CLLocation  = self.m_locationManager!.location!
+                
+                let obj_loc:CLLocation = CLLocation(latitude: annotation.coordinate.latitude,longitude: annotation.coordinate.longitude)
+                
+                let distance:CLLocationDistance = (current_loc.distance(from: obj_loc))
+                
+                let string1:String = "Distance:\(distance)"
+                
+                annotation.subtitle = string1
+                
+            }
+            return pinView
+            
+        }
+        
+        return nil
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
+        let annotation:MKMyPointAnnotation = annotationView.annotation as! MKMyPointAnnotation
+        
+        let current_loc:CLLocation  = self.m_locationManager!.location!
+        
+        let obj_loc:CLLocation = CLLocation(latitude: annotation.coordinate.latitude,longitude: annotation.coordinate.longitude)
+        
+        let distance:CLLocationDistance = (current_loc.distance(from: obj_loc))
+        
+        let string1:String = "Distance:\(distance)"
+
+        annotation.subtitle = string1
+//        let alert = UIAlertController(title: "Alert", message: string1, preferredStyle: UIAlertControllerStyle.alert)
+//        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+//        self.present(alert, animated: true, completion: nil)
+        
+    }
+
     // END-CODE-UOC-4
     
 
