@@ -265,15 +265,7 @@ class ViewControllerComplex: UIViewController,MKMapViewDelegate,CLLocationManage
         
         let annotation:MKMyPointAnnotation = annotationView.annotation as! MKMyPointAnnotation
         
-        let current_loc:CLLocation  = self.m_locationManager!.location!
-        
-        let obj_loc:CLLocation = CLLocation(latitude: annotation.coordinate.latitude,longitude: annotation.coordinate.longitude)
-        
-        let distance:CLLocationDistance = (current_loc.distance(from: obj_loc))
-        
-        let string1:String = "Distance:\(distance)"
-
-        annotation.subtitle = string1
+        self.player.
 //        let alert = UIAlertController(title: "Alert", message: string1, preferredStyle: UIAlertControllerStyle.alert)
 //        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
 //        self.present(alert, animated: true, completion: nil)
