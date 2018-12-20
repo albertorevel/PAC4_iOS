@@ -154,14 +154,14 @@ class ViewControllerComplex: UIViewController,MKMapViewDelegate,CLLocationManage
     // BEGIN-CODE-UOC-8
     func Play(sender:UIButton)
     {
-      NSLog("hey")
+      self.player?.play()
       
     }
 
     
     func Pause(sender:UIButton)
     {
-     NSLog("hay")
+     self.player?.pause()
     }
     // END-CODE-UOC-8
     
@@ -265,7 +265,11 @@ class ViewControllerComplex: UIViewController,MKMapViewDelegate,CLLocationManage
         
         let annotation:MKMyPointAnnotation = annotationView.annotation as! MKMyPointAnnotation
         
-        self.player.
+        if let url = URL(string: annotation.movieURL) {
+            let playerItem = AVPlayerItem(url: url)
+            self.player?.replaceCurrentItem(with: playerItem)
+            self.player?.play()
+        }
 //        let alert = UIAlertController(title: "Alert", message: string1, preferredStyle: UIAlertControllerStyle.alert)
 //        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
 //        self.present(alert, animated: true, completion: nil)
