@@ -22,7 +22,6 @@
 		B4AE71531D96EADC005F4C75 /* ViewControllerBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AE71511D96EADC005F4C75 /* ViewControllerBasic.swift */; };
 		B4AE71541D96EADC005F4C75 /* ViewControllerBasic.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4AE71521D96EADC005F4C75 /* ViewControllerBasic.xib */; };
 		B4AE717C1D96F1B2005F4C75 /* icons in Resources */ = {isa = PBXBuildFile; fileRef = B4AE717B1D96F1B2005F4C75 /* icons */; };
-		EE6BD65321C8CA9A00941494 /* data4.xml in Resources */ = {isa = PBXBuildFile; fileRef = EE6BD65221C8CA9A00941494 /* data4.xml */; };
 		EE6BD65621C8CC4B00941494 /* MKMyPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6BD65521C8CC4B00941494 /* MKMyPointAnnotation.swift */; };
 		EE6BD65921C8CD1C00941494 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE6BD65821C8CD1C00941494 /* CoreLocation.framework */; };
 		EE6BD65B21C8CD2400941494 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE6BD65A21C8CD2400941494 /* MapKit.framework */; };
@@ -67,7 +66,6 @@
 		B4AE71511D96EADC005F4C75 /* ViewControllerBasic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerBasic.swift; sourceTree = "<group>"; };
 		B4AE71521D96EADC005F4C75 /* ViewControllerBasic.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewControllerBasic.xib; sourceTree = "<group>"; };
 		B4AE717B1D96F1B2005F4C75 /* icons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = icons; sourceTree = "<group>"; };
-		EE6BD65221C8CA9A00941494 /* data4.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = data4.xml; sourceTree = "<group>"; };
 		EE6BD65521C8CC4B00941494 /* MKMyPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKMyPointAnnotation.swift; sourceTree = "<group>"; };
 		EE6BD65821C8CD1C00941494 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		EE6BD65A21C8CD2400941494 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -125,7 +123,6 @@
 			isa = PBXGroup;
 			children = (
 				EE6BD65421C8CC1B00941494 /* Custom */,
-				EE6BD65221C8CA9A00941494 /* data4.xml */,
 				B42BD9AF1DFF28680037AE2C /* img */,
 				B4AE717B1D96F1B2005F4C75 /* icons */,
 				B4AE714A1D966763005F4C75 /* Parsing */,
@@ -308,7 +305,6 @@
 				B4AE71541D96EADC005F4C75 /* ViewControllerBasic.xib in Resources */,
 				B4AE71221D966639005F4C75 /* Assets.xcassets in Resources */,
 				B4AE717C1D96F1B2005F4C75 /* icons in Resources */,
-				EE6BD65321C8CA9A00941494 /* data4.xml in Resources */,
 				B4AE71201D966639005F4C75 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

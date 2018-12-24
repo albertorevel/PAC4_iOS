@@ -77,17 +77,7 @@ class ViewControllerComplex: UIViewController,MKMapViewDelegate,CLLocationManage
         self.m_AVPlayerLayer?.frame = videoRect
         self.m_AVPlayerLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
         self.view.layer.addSublayer(self.m_AVPlayerLayer!)
-//        self.player?.play()
-        
-        //self.player?.addObserver(self, forKeyPath: "status", options: NSKeyValueObservingOptions(rawValue: 0), context: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.playerItemDidReachEnd), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: self.player.currentItem)
-        
-//        let urlString = "http://einfmlinux1.uoc.edu/devios/media/movie.mp4"
-//        let urlURL = URL(string: urlString)
-//
-//        self.m_player.player = AVPlayer(url: urlURL)
-//        self.m_player.player?.play()
-        
+      
         // We create the tv frame
         let tvImageView = UIImageView(frame: videoRect)
         tvImageView.image = UIImage(named: "tv.png")
@@ -120,14 +110,16 @@ class ViewControllerComplex: UIViewController,MKMapViewDelegate,CLLocationManage
         
         self.m_locationManager?.delegate = self
         
-        self.m_locationManager?.allowsBackgroundLocationUpdates = true
+        self.m_locationManager?.allowsBackgroundLocationUpdates = false
         
-        self.m_locationManager?.distanceFilter = 500 // The minimum distance (measured in meters) a device must move horizontally before an update event is generated.
+        self.m_locationManager?.distanceFilter = 50 // The minimum distance (measured in meters) a device must move horizontally before an update event is generated.
         
         self.m_locationManager?.desiredAccuracy = kCLLocationAccuracyBest // Determining a location with greater accuracy requires more time and more power.
         
         //  if you need the current location only within a kilometer, you should specify kCLLocationAccuracyKilometer
         //   requres less time and power.
+        
+        self.m_map?.showsUserLocation = true
         
         self.m_map?.delegate = self
         
@@ -138,14 +130,14 @@ class ViewControllerComplex: UIViewController,MKMapViewDelegate,CLLocationManage
         }
         else{
             self.m_locationManager?.startUpdatingLocation()
-//            self.startLocation()
-            
         }
         
         // END-CODE-UOC-5
         
         
         // BEGIN-CODE-UOC-6
+        
+        self.player?.addObserver(self, forKeyPath: "status", options: [.old, .new], context: nil)
         
         // END-CODE-UOC-6
         
@@ -202,6 +194,17 @@ class ViewControllerComplex: UIViewController,MKMapViewDelegate,CLLocationManage
     
     // BEGIN-CODE-UOC-7
     
+    override func observeValue(forKeyPath: String?, of: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?)
+    {
+        
+        if (forKeyPath == "status") {
+                if (self.player?.status == AVPlayerStatus.readyToPlay) {
+                self.player?.play()
+            }
+        }
+        
+        
+    }
     // END-CODE-UOC-7
     
     
@@ -241,24 +244,32 @@ class ViewControllerComplex: UIViewController,MKMapViewDelegate,CLLocationManage
                 
                 pinView.calloutOffset = CGPoint(x: -5, y: 5)
                 pinView.rightCalloutAccessoryView = UIButton(type:.detailDisclosure) as UIView
-                
-                ///
-                let current_loc:CLLocation  = self.m_locationManager!.location!
-                
-                let obj_loc:CLLocation = CLLocation(latitude: annotation.coordinate.latitude,longitude: annotation.coordinate.longitude)
-                
-                let distance:CLLocationDistance = (current_loc.distance(from: obj_loc))
-                
-                let string1:String = "Distance:\(distance)"
-                
-                annotation.subtitle = string1
-                
             }
             return pinView
             
         }
         
         return nil
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect annotationView: MKAnnotationView) {
+        
+        guard let annotation:MKMyPointAnnotation = annotationView.annotation as? MKMyPointAnnotation else {
+            return
+        }
+        
+        guard let current_loc:CLLocation  = self.m_locationManager!.location else {
+            return
+        }
+            
+        let obj_loc:CLLocation = CLLocation(latitude: annotation.coordinate.latitude,longitude: annotation.coordinate.longitude)
+        
+        let distance:CLLocationDistance = (current_loc.distance(from: obj_loc))
+        
+        let string1:String = String(format: "Distance: %.2f", distance)
+        
+        annotation.subtitle = string1
+    
     }
     
     func mapView(_ mapView: MKMapView, annotationView: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
@@ -268,12 +279,9 @@ class ViewControllerComplex: UIViewController,MKMapViewDelegate,CLLocationManage
         if let url = URL(string: annotation.movieURL) {
             let playerItem = AVPlayerItem(url: url)
             self.player?.replaceCurrentItem(with: playerItem)
+            
             self.player?.play()
         }
-//        let alert = UIAlertController(title: "Alert", message: string1, preferredStyle: UIAlertControllerStyle.alert)
-//        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
-//        self.present(alert, animated: true, completion: nil)
-        
     }
 
     // END-CODE-UOC-4

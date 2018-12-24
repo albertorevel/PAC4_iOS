@@ -17,6 +17,11 @@ class MKMyPointAnnotation: MKPointAnnotation {
 //    var title:String?
 //    var subtitle:String?
     
+//    override var subtitle: String? {
+//        willSet { willChangeValue(forKey: "subtitle") }
+//        didSet { didChangeValue(forKey: "subtitle") }
+//    }
+    
     var movieURL:String
 
     init(coordinate:CLLocationCoordinate2D, title:String, subtitle:String, movieURL:String)
