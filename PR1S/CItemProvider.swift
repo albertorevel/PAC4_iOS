@@ -107,7 +107,6 @@ class CItemProvider : NSObject, XMLParserDelegate
     {
     // BEGIN-CODE-UOC-2
     
-        
         self.m_items = NSMutableArray()
         let str_url:String = "http://einfmlinux1.uoc.edu/devios/data4.xml";
         
@@ -115,9 +114,7 @@ class CItemProvider : NSObject, XMLParserDelegate
         
         do
         {
-//            xmlData = try NSData(contentsOf: URL(string: str_url)!)
-            let filepath = Bundle.main.path(forResource: "data4", ofType: "xml")
-            xmlData = try NSData(contentsOfFile: filepath ?? "data4.xml")
+            xmlData = try NSData(contentsOf: URL(string: str_url)!)
             self.m_parser = XMLParser(data: xmlData as Data)
             self.m_parser?.delegate = self
             self.m_parser?.parse();

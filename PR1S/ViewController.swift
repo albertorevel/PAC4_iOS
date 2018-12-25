@@ -115,7 +115,7 @@ class ViewController: UITableViewController {
         
         
         // It loads a different ViewController (ViewControllerComplex) if item's type is equal to 6
-        // It stores item's data or item itself in the Controller (depending on item's type).
+        // It stores the item in the Controller (depending on item's type).
         if (item.m_type == 6) {
             vc = ViewControllerComplex()
             (vc as! ViewControllerComplex).m_item = item
